@@ -16,14 +16,7 @@ private const val TAG = "ArticleAdapter"
 class ArticleAdapter(private val context: Context, private val articles: List<Article>) :
     RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
-    fun bind(article: Article) {
-        titleTextView.text = article.headline?.main
-        abstractTextView.text = article.abstract
 
-        Glide.with(context)
-            .load(article.mediaImageUrl)
-            .into(mediaImageView)
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_article, parent, false)
         return ViewHolder(view)
@@ -48,7 +41,14 @@ class ArticleAdapter(private val context: Context, private val articles: List<Ar
         }
 
         // TODO: Write a helper method to help set up the onBindViewHolder method
+        fun bind(article: Article) {
+            titleTextView.text = article.headline?.main
+            abstractTextView.text = article.abstract
 
+            Glide.with(context)
+                .load(article.mediaImageUrl)
+                .into(mediaImageView)
+        }
         override fun onClick(v: View?) {
             // TODO: Get selected article
             val article = articles[absoluteAdapterPosition]
